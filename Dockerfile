@@ -32,8 +32,6 @@ ENV TRANSFORMERS_VERBOSITY=error
 ENV TRANSFORMERS_NO_ADVISORY_WARNINGS=1
 EXPOSE 5060
 
-RUN ./start.sh
-
-#CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "5060"]
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "5060"]
 
 
