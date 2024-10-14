@@ -27,12 +27,13 @@ def download_vgt_model(model_name: str):
 
 
 def download_embedding_model():
+
     model_path = join(MODELS_PATH, "layoutlm-base-uncased")
     if exists(model_path):
         return
     makedirs(model_path, exist_ok=True)
     service_logger.info("Embedding model is being downloaded")
-    snapshot_download(repo_id="microsoft/layoutlm-base-uncased", local_dir=model_path, local_dir_use_symlinks=False)
+    snapshot_download(repo_id="microsoft/layoutlm-base-uncased", force_download=True,local_dir=model_path)
 
 
 def download_from_hf_hub(path: Path):
