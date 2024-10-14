@@ -29,7 +29,8 @@ RUN python src/download_models.py
 ENV PYTHONPATH "${PYTHONPATH}:/app/src"
 ENV TRANSFORMERS_VERBOSITY=error
 ENV TRANSFORMERS_NO_ADVISORY_WARNINGS=1
+EXPOSE 5060
 
-RUN ./start.sh
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "5060"]
 
 
