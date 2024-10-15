@@ -32,3 +32,6 @@ ENV PYTHONPATH "${PYTHONPATH}:/app"
 ENV TRANSFORMERS_VERBOSITY=error
 ENV TRANSFORMERS_NO_ADVISORY_WARNINGS=1
 
+
+EXPOSE 5060
+CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "--chdir", "./src", "app:app", "--bind", "0.0.0.0:5060", "--timeout", "10000"]
