@@ -10,7 +10,7 @@ from PIL import Image
 from pdf2image import convert_from_path
 from pdf_features.PdfFeatures import PdfFeatures
 
-from src.configuration import IMAGES_ROOT_PATH, XMLS_PATH
+from configuration import IMAGES_ROOT_PATH, XMLS_PATH
 
 
 class PdfImages:
@@ -39,7 +39,6 @@ class PdfImages:
     @staticmethod
     def from_pdf_path(pdf_path: str | Path, pdf_name: str = "", xml_file_name: str = ""):
         xml_path = None if not xml_file_name else Path(XMLS_PATH, xml_file_name)
-
         if xml_path and not xml_path.parent.exists():
             os.makedirs(xml_path.parent, exist_ok=True)
 
@@ -48,6 +47,7 @@ class PdfImages:
         if pdf_name:
             pdf_features.file_name = pdf_name
         else:
+
             pdf_name = Path(pdf_path).parent.name if Path(pdf_path).name == "document.pdf" else Path(pdf_path).stem
             pdf_features.file_name = pdf_name
         pdf_images = convert_from_path(pdf_path, dpi=72)
