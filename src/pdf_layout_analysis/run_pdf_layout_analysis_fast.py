@@ -6,13 +6,27 @@ from extraction_formats.extract_formula_formats import extract_formula_format
 from extraction_formats.extract_table_formats import extract_table_format
 from fast_trainer.ParagraphExtractorTrainer import ParagraphExtractorTrainer
 from fast_trainer.model_configuration import MODEL_CONFIGURATION as PARAGRAPH_EXTRACTION_CONFIGURATION
-from pdf_layout_analysis.run_pdf_layout_analysis import pdf_content_to_pdf_path
+#from pdf_layout_analysis.run_pdf_layout_analysis import pdf_content_to_pdf_path
 from pdf_tokens_type_trainer.TokenTypeTrainer import TokenTypeTrainer
 from pdf_tokens_type_trainer.ModelConfiguration import ModelConfiguration
-
+import uuid
+from os.path import join
+from pathlib import Path
 from configuration import ROOT_PATH, service_logger
 from data_model.SegmentBox import SegmentBox
+import tempfile
 
+
+def get_file_path(file_name, extension):
+    return join(tempfile.gettempdir(), file_name + "." + extension)
+
+def pdf_content_to_pdf_path(file_content):
+    file_id = str(uuid.uuid1())
+
+    pdf_path = Path(get_file_path(file_id, "pdf"))
+    pdf_path.write_bytes(file_content)
+
+    return pdf_path
 
 def analyze_pdf_fast(file: AnyStr, xml_file_name: str = "", extraction_format: str = "") -> list[dict]:
     pdf_path = pdf_content_to_pdf_path(file)
