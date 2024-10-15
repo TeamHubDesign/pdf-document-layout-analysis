@@ -28,7 +28,7 @@ COPY ./src/. ./src
 COPY ./models/. ./models
 RUN python src/download_models.py
 
-ENV PYTHONPATH "${PYTHONPATH}:/app/src"
+ENV PYTHONPATH "${PYTHONPATH}:/app"
 ENV TRANSFORMERS_VERBOSITY=error
 ENV TRANSFORMERS_NO_ADVISORY_WARNINGS=1
 EXPOSE 5060
