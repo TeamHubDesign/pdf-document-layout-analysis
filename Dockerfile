@@ -24,6 +24,7 @@ RUN cd src/detectron2; git checkout 70f454304e1a38378200459dd2dbca0f0f4a5ab4; py
 
 COPY ./start.sh ./start.sh
 COPY ./src/. ./src
+
 COPY ./models/. ./models
 RUN python src/download_models.py
 
@@ -32,5 +33,5 @@ ENV TRANSFORMERS_VERBOSITY=error
 ENV TRANSFORMERS_NO_ADVISORY_WARNINGS=1
 EXPOSE 5060
 
-CMD ["uvicorn", "src.app:app", "--host", "0.0.0.0", "--port", "5060"]
+CMD ["uvicorn", "src.app:app", "--port", "5060"]
 
